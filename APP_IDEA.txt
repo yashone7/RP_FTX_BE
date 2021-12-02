@@ -1,0 +1,100 @@
+rp-ftx-fe 2nd idea
+=============================
+
+Converting unorganized sector to organized sector in medical 
+sales distribution
+
+problem
+=====================
+
+current business scenario is as follows, the medecine distributors have 
+a couple retailers who place orders to the distributors and then pay them
+back in cheque or cash or dd. And the sales boys are in charge of collecting 
+the payment.
+
+solution
+=====================
+Introducing simplified way to receive payments and honor you retailers' requests
+using __APP_NAME__ 
+
+-> settle payments quickly (day-1 payments)
+-> get insights and analytics related to individual clients 
+
+======================================================================
+
+Distributors - Retailers
+
+User 
+-----------------------------
+type - distributor / retailer
+id - 
+name - 
+password -
+email - 
+phone_number - 
+
+orders
+-------------
+order_id
+order_amount
+client_id (retailer_id)
+order_status (pending/successful/fail)
+
+invoices
+---------------
+invoice_id
+order_id
+
+order_items
+--------------
+item_id
+product_id
+product_qty
+product_price
+order_id
+
+products
+------------
+product_name
+product_id
+product_price
+product_stock_value
+
+-> createDistributor web service is working fine! 
+-> createRetailer web service is working fine!
+
+If TXN is successfull -> then update order details and create an invoice
+if TXN fails -> update order details to fail and revoke product details 
+
+
+getAllDistributors - pending
+getDistributorByName - pending REGEXP 
+getRetailerDistributorFavs - pending
+getProductsByDistributor - pending
+getProductById - done
+
+cart functionality - frontend -> 
+
+getOrdersByRetailer
+createOrderItem
+updateProduct
+createOrder
+
+if order successful ->
+updateOrder
+createInvoice
+
+if order fails ->
+revokeProduct
+updateOrderStatus
+
+distributor
+=========================
+getTotalSale - join orders and retailer
+getSaleByRetailer - 
+getSaleByRetailer - filter via date
+createProduct
+updateProduct
+deleteProduct
+getAllProductsByDistributorId
+
