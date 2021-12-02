@@ -36,11 +36,17 @@ const {
   createItemValidator,
 } = require("../../Middlewares/validators/items/items");
 
+const AuthService = require("../../Services/Auth/authService");
+
 router.post("/distributors", createDistributorValidator, (req, res, next) => {
   return DistributorService.createDistributor(req, res, next);
 });
 router.get("/distributors", createDistributorValidator, (req, res, next) => {
   return DistributorService.getAllDistributors(req, res, next);
+});
+
+router.get("/distributors/search", (req, res, next) => {
+  return DistributorService.searchDistributorByName(req, res, next);
 });
 
 router.post("/products", createProductValidator, (req, res, next) => {
@@ -86,5 +92,21 @@ router.get("/order/:order_id", createOrderValidator, (req, res, next) => {
 router.post("/items", createItemValidator, (req, res, next) => {
   return ItemService.createItem(req, res, next);
 });
+
+router.post("/distributors/auth", (req, res, next) => {
+  return AuthService.distributorLogin(req, res, next);
+});
+
+router.post("/retailers/auth", (req, res, next) => {
+  return AuthService.retailerLogin(req, res, next);
+});
+
+router.get("/auth/verify", (req, res, next) => {
+  return AuthService.verifyToken(req, res, next);
+});
+
+// router.post("/auth", (req, res, next) => {
+//   return AuthService.login(req, res, next);
+// });
 
 module.exports = router;

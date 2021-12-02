@@ -27,7 +27,7 @@ const Products = sequelize.define("Product", {
     allowNull: false,
   },
   distributor_id: {
-    type: UUID,
+    type: Sequelize.UUID,
     allowNull: false,
   },
 });
