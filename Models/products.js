@@ -1,4 +1,11 @@
-const { Sequelize, UUIDV4, INTEGER, STRING, FLOAT } = require("sequelize");
+const {
+  Sequelize,
+  UUIDV4,
+  INTEGER,
+  STRING,
+  FLOAT,
+  UUID,
+} = require("sequelize");
 const { sequelize } = require("../config/connectDB");
 
 const Products = sequelize.define("Product", {
@@ -17,6 +24,10 @@ const Products = sequelize.define("Product", {
   },
   number_in_stock: {
     type: INTEGER,
+    allowNull: false,
+  },
+  distributor_id: {
+    type: UUID,
     allowNull: false,
   },
 });

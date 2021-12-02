@@ -12,10 +12,19 @@ module.exports.createFavorite = async (req, res, next) => {
     }
 
     let { retailer_id, distributor_id } = req.body;
+    let favorite = await Favorite.findOne({
+      where: { retailer_id, distributor_id },
+    });
 
+    if (!_.isEmpty(favorite)) {
+      return res.status(404).send({
+        message:
+          "Favorite with the given distributor_id and retailer_id already exists",
+      });
+    }
     const favorite_id = uuidv4();
 
-    const favorite = await Favorite.create({
+    favorite = await Favorite.create({
       favorite_id,
       retailer_id,
       distributor_id,

@@ -1,4 +1,11 @@
-const { Sequelize, UUIDV4, FLOAT, UUID, DataTypes } = require("sequelize");
+const {
+  Sequelize,
+  UUIDV4,
+  FLOAT,
+  UUID,
+  DataTypes,
+  DATE,
+} = require("sequelize");
 const { sequelize } = require("../config/connectDB");
 
 const Orders = sequelize.define("Order", {
@@ -21,6 +28,10 @@ const Orders = sequelize.define("Order", {
   },
   distributor_id: {
     type: UUID,
+    allowNull: false,
+  },
+  order_date: {
+    type: DATE,
     allowNull: false,
   },
 });

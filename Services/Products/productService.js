@@ -11,7 +11,8 @@ module.exports.createProduct = async (req, res, next) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let { product_name, product_price, number_in_stock } = req.body;
+    let { product_name, product_price, number_in_stock, distributor_id } =
+      req.body;
 
     console.log(req.body);
 
@@ -29,6 +30,7 @@ module.exports.createProduct = async (req, res, next) => {
       product_name,
       product_price,
       number_in_stock,
+      distributor_id,
     });
 
     return res.status(200).send({ message: "Product created successfully" });
@@ -61,6 +63,24 @@ module.exports.getProductById = async (req, res, next) => {
       return res
         .status(404)
         .send("No products exist in the database with given Product Id");
+    }
+    return res.status(200).json(products);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("server error");
+  }
+};
+module.exports.getProductsByDistributorId = async (req, res, next) => {
+  try {
+    const { distributor_id } = req.params;
+    console.log(req.params);
+    let products = await Product.findAll({
+      where: { distributor_id },
+    });
+    if (_.isEmpty(products)) {
+      return res
+        .status(404)
+        .send("No products exist in the database with given distributor Id");
     }
     return res.status(200).json(products);
   } catch (err) {

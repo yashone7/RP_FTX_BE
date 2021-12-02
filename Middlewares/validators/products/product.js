@@ -10,4 +10,7 @@ module.exports.createProductValidator = [
     "number_in_stock",
     "Number in stock is required and must be numeric"
   ).isNumeric(),
+  check("distributor_id", "distributor id of the Product is required")
+    .not()
+    .isEmpty(),
 ];

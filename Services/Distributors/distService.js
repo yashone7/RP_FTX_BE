@@ -44,3 +44,16 @@ module.exports.createDistributor = async (req, res, next) => {
     return res.status(500).send("server error");
   }
 };
+
+module.exports.getAllDistributors = async (req, res, next) => {
+  try {
+    let distributors = await Distributor.findAll();
+    if (_.isEmpty(distributors)) {
+      return res.status(404).send("No distributors exist in the database");
+    }
+    return res.status(200).json(distributors);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("server error");
+  }
+};
