@@ -49,19 +49,24 @@ module.exports.createRetailer = async (req, res, next) => {
 
 module.exports.getRetailerDistributorFavs = async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
     let { retailer_id } = req.query;
     const favDistributors = await sequelize.query(
-      `SELECT d.name AS distributor_name FROM favourites f INNER JOIN retailer r ON r.retailer_id = f.retailer_id
-    INNER JOIN distributors d ON d.distributor_id = f.distributor_id WHERE r.retailer_id = ${retailer_id}; `,
+      `SELECT 
+      d.name as distributor_name,
+      d.distributor_id, 
+      r.retailer_id,
+      r.name as retailer_name 
+      FROM favorites f INNER JOIN retailers r ON r.retailer_id = f.retailer_id
+      INNER JOIN distributors d ON d.distributor_id = f.distributor_id 
+      WHERE r.retailer_id = "${retailer_id}"; `,
       { type: QueryTypes.SELECT }
     );
-    console.log(favDistributors);
-    return favDistributors;
+    if (_.isEmpty(favDistributors)) {
+      return res.status(404).json({
+        message: "sorry no favourite distributors for given retailer",
+      });
+    }
+    return res.status(200).json(favDistributors);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "server error", error: err });

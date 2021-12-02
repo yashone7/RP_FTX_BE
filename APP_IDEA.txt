@@ -67,18 +67,18 @@ If TXN is successfull -> then update order details and create an invoice
 if TXN fails -> update order details to fail and revoke product details 
 
 
-getAllDistributors - pending
-getDistributorByName - pending REGEXP 
-getRetailerDistributorFavs - pending
-getProductsByDistributor - pending
+getAllDistributors - pending - dheeraj
+getDistributorByName - pending REGEXP - yashwanth
+getRetailerDistributorFavs - done
+getProductsByDistributor - pending - dheeraj
 getProductById - done
 
 cart functionality - frontend -> 
 
-getOrdersByRetailer
-createOrderItem
-updateProduct
-createOrder
+getOrdersByRetailer - dheeraj
+createOrderItem - dheeraj
+updateProduct 
+createOrder - dheeraj
 
 if order successful ->
 updateOrder
