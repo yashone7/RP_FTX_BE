@@ -76,9 +76,9 @@ getProductById - done
 cart functionality - frontend -> 
 
 getOrdersByRetailer - dheeraj (done)
-createOrderItem - dheeraj
-updateProduct 
-createOrder - dheeraj (done)
+createOrderItem - dheeraj - done - redundant
+updateProduct - 
+createOrder - dheeraj (done) fixed by yashwanth
 getOrderByID - dheeraj (done)
 
 if order successful ->
@@ -98,4 +98,27 @@ createProduct
 updateProduct
 deleteProduct
 getAllProductsByDistributorId
+
+
+
+orders API 
+=============================
+
+/api/orders - POST
+
+order_id - created from backend
+order_amount - req.body
+distributor_id - req.body
+client_id -  req.body
+order_status - "pending"
+
+order_items is dependent upon orders
+=======================================
+item_id - created in the backend
+product_id - req.body
+product_price - req.body
+product_qty - req.body
+order_id - part of transaction so backend will fill order_id
+
+
 

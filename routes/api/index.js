@@ -70,9 +70,12 @@ router.delete("/favorites", createFavoriteValidator, (req, res, next) => {
   return FavoriteService.deleteFavorite(req, res, next);
 });
 
-router.post("/orders", createOrderValidator, (req, res, next) => {
-  return OrderService.createOrder(req, res, next);
-});
+router.post(
+  "/orders",
+  /*createOrderValidator, */ (req, res, next) => {
+    return OrderService.createOrder(req, res, next);
+  }
+);
 router.get("/orders/:client_id", createOrderValidator, (req, res, next) => {
   return OrderService.getAllOrdersByDistributorId(req, res, next);
 });

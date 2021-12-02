@@ -1,0 +1,1 @@
+SELECT * FROM favorites f INNER JOIN retailers r ON r.retailer_id = f.retailer_id  INNER JOIN distributors d ON d.distributor_id = f.distributor_id WHERE r.retailer_id = "134c6285-e2fb-4efd-a300-47b5cdc3a387";

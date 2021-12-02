@@ -4,9 +4,10 @@ const {
   FLOAT,
   UUID,
   DataTypes,
-  DATE,
+  // DATETIME,
 } = require("sequelize");
 const { sequelize } = require("../config/connectDB");
+// const { formatISO } = require("date-fns");
 
 const Orders = sequelize.define("Order", {
   order_id: {
@@ -24,16 +25,18 @@ const Orders = sequelize.define("Order", {
   },
   order_status: {
     type: DataTypes.ENUM("success", "pending", "failed"),
+    defaultValue: "pending",
     allowNull: false,
   },
   distributor_id: {
     type: UUID,
     allowNull: false,
   },
-  order_date: {
-    type: DATE,
-    allowNull: false,
-  },
+  // order_date: {
+  //   type: DATETIME,
+  //   defaultValue: formatISO(Date.now()),
+  //   allowNull: false,
+  // },
 });
 
 module.exports = Orders;

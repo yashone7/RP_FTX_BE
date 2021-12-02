@@ -13,7 +13,7 @@ module.exports.createItem = async (req, res, next) => {
 
     let { product_quantity, product_price, product_id, order_id } = req.body;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     let item = await Item.findOne({ where: { order_id, product_id } });
 
