@@ -8,4 +8,16 @@ module.exports.createRetailerValidator = [
     .isLength({ min: 6 })
     .not()
     .isEmpty(),
+  check("address", "please enter the address of your company").not().isEmpty(),
+  check("pincode", "please enter a valid picode").isPostalCode("IN"),
+  check("location.type", "please enter the type of geojson document")
+    .not()
+    .isEmpty(),
+  check("location.geometry", "please provide a valid point in geojson document")
+    .not()
+    .isEmpty(),
+  check(
+    "location.geometry.coordinates",
+    "please provide a proper lat long array"
+  ).isArray({ min: 0, max: 2 }),
 ];

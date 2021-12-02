@@ -1,4 +1,4 @@
-const { Sequelize, UUIDV4, BOOLEAN, STRING } = require("sequelize");
+const { Sequelize, UUIDV4, BOOLEAN, STRING, TEXT, JSON } = require("sequelize");
 const { sequelize } = require("../config/connectDB");
 
 const Retailer = sequelize.define("Retailer", {
@@ -25,6 +25,18 @@ const Retailer = sequelize.define("Retailer", {
     allowNull: false,
   },
   phone_number: {
+    type: STRING,
+    allowNull: false,
+  },
+  address: {
+    type: TEXT,
+    allowNull: false,
+  },
+  location: {
+    type: JSON,
+    allowNull: false,
+  },
+  pincode: {
     type: STRING,
     allowNull: false,
   },
