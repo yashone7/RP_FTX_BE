@@ -12,7 +12,8 @@ module.exports.createRetailer = async (req, res, next) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let { name, phone_number, email, password } = req.body;
+    let { name, phone_number, email, password, address, pincode, location } =
+      req.body;
 
     let retailer = await Retailer.findOne({ where: { email } });
 
@@ -33,11 +34,14 @@ module.exports.createRetailer = async (req, res, next) => {
       email,
       password,
       retailer_id,
+      address,
+      location,
+      pincode,
     });
 
     return res.status(200).send({ message: "retailer created successfully" });
-  } catch (error) {
+  } catch (err) {
     console.log(err);
-    return res.status(500).send("server error");
+    return res.status(500).json({ message: "server error", error: err });
   }
 };
