@@ -37,6 +37,7 @@ const {
 } = require("../../Middlewares/validators/items/items");
 
 const AuthService = require("../../Services/Auth/authService");
+const { verifyToken } = require("../../Middlewares/Auth/verifyToken");
 
 router.post("/distributors", createDistributorValidator, (req, res, next) => {
   return DistributorService.createDistributor(req, res, next);

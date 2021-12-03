@@ -116,4 +116,7 @@ retailer-wise sale -> join orders, distributors, retailers where orders status i
 
 product-wise sale -> join order_items
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXRhaWxlcl9pZCI6IjEzNGM2Mjg1LWUyZmItNGVmZC1hMzAwLTQ3YjVjZGMzYTM4NyIsIm5hbWUiOiJUZXN0IG1lZGljYWxzIDEiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwiaXNEaXN0cmlidXRvciI6ZmFsc2UsInBob25lX251bWJlciI6Ijk4NDgwMzI5MTkiLCJpYXQiOjE2Mzg0NzUxNTcsImV4cCI6MTYzODQ4NTk1N30.mx9AOornrzPkF6zuCR_tEA3JYkAoQQorXvLPKacYXJY
+font end --->
+
+create products
+update products
