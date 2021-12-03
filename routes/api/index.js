@@ -105,8 +105,8 @@ router.get("/auth/verify", (req, res, next) => {
   return AuthService.verifyToken(req, res, next);
 });
 
-// router.post("/auth", (req, res, next) => {
-//   return AuthService.login(req, res, next);
-// });
+router.post("/auth", (req, res, next) => {
+  return AuthService.login(req, res, next);
+});
 
 module.exports = router;

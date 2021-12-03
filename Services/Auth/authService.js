@@ -92,7 +92,7 @@ module.exports.login = async (req, res, next) => {
 
     console.log(type);
 
-    if (type === "retailer") {
+    if (_.trim(type) === "retailer") {
       let retailer = await Retailer.findOne({ where: { email } });
 
       if (_.isEmpty(retailer)) {
@@ -119,12 +119,12 @@ module.exports.login = async (req, res, next) => {
         { expiresIn: "3h" },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          return res.json({ token });
         }
       );
-    }
 
-    if (type === "distributor") {
+      //   console.log("ran");
+    } else if (_.trim(type) === "distributor") {
       let { email, password } = req.body;
 
       let distributor = await Distributor.findOne({ where: { email } });
@@ -156,11 +156,13 @@ module.exports.login = async (req, res, next) => {
         { expiresIn: "3h" },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          return res.json({ token });
         }
       );
+
+      //   console.log("ran-2");
     } else {
-      return res.status(400).send("please select which a proper type of user");
+      return res.status(400).send("please give a proper type");
     }
   } catch (err) {
     console.log(err);
