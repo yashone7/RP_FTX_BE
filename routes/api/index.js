@@ -82,6 +82,9 @@ router.get("/orders/:client_id", createOrderValidator, (req, res, next) => {
 router.get("/order/:order_id", createOrderValidator, (req, res, next) => {
   return OrderService.getOrderById(req, res, next);
 });
+router.post("/orders/:order_id", createOrderValidator, (req, res, next) => {
+  return OrderService.updateOrderById(req, res, next);
+});
 
 router.post("/items", createItemValidator, (req, res, next) => {
   return ItemService.createItem(req, res, next);

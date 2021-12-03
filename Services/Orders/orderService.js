@@ -110,3 +110,22 @@ module.exports.getOrderById = async (req, res, next) => {
     return res.status(500).send("server error");
   }
 };
+module.exports.updateOrderById = async (req, res, next) => {
+  try {
+    const { order_id } = req.params;
+    let order = await Order.findOne({ where: { order_id } });
+    if (_.isEmpty(order)) {
+      return res
+        .status(404)
+        .send("No order exist in the database with given Order Id");
+    }
+
+    order.order_status = "success";
+    let newOrder = await order.save();
+
+    return res.status(200).json(newOrder);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("server error");
+  }
+};
