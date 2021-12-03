@@ -38,6 +38,7 @@ const {
 
 const AuthService = require("../../Services/Auth/authService");
 const { verifyToken } = require("../../Middlewares/Auth/verifyToken");
+const RazorpayService = require("../../Services/Razorpay/razorpayService");
 
 router.post("/distributors", createDistributorValidator, (req, res, next) => {
   return DistributorService.createDistributor(req, res, next);
@@ -111,6 +112,10 @@ router.get("/auth/verify", (req, res, next) => {
 
 router.post("/auth", (req, res, next) => {
   return AuthService.login(req, res, next);
+});
+
+router.post("/razorpay", (req, res, next) => {
+  return RazorpayService.createOrder(req, res, next);
 });
 
 module.exports = router;
