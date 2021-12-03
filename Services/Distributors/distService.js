@@ -1,9 +1,10 @@
 const { validationResult } = require("express-validator");
+const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcryptjs");
+const _ = require("lodash");
 const Distributor = require("../../Models/distributors");
 const { QueryTypes } = require("sequelize");
-const { v4: uuidv4 } = require("uuid");
-const _ = require("lodash");
-const bcrypt = require("bcryptjs");
+const { sequelize } = require("../../config/connectDB");
 
 module.exports.createDistributor = async (req, res, next) => {
   try {
@@ -55,5 +56,25 @@ module.exports.getAllDistributors = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     return res.status(500).send("server error");
+  }
+};
+
+module.exports.searchDistributorByName = async (req, res, next) => {
+  try {
+    const { name: distributor_name } = req.query;
+    const distributors = await sequelize.query(
+      `CALL get_distributor_by_name("${distributor_name}")`
+    );
+
+    if (_.isEmpty(distributors)) {
+      return res
+        .status(404)
+        .json({ message: "No distributors with given name" });
+    }
+
+    return res.status(200).json(distributors);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "server error", error: err });
   }
 };

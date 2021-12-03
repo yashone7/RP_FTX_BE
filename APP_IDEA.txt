@@ -67,19 +67,9 @@ If TXN is successfull -> then update order details and create an invoice
 if TXN fails -> update order details to fail and revoke product details 
 
 
-getAllDistributors - done - dheeraj
-getDistributorByName - pending REGEXP - yashwanth
-getRetailerDistributorFavs - done
-getProductsByDistributor - done - dheeraj
-getProductById - done
 
 cart functionality - frontend -> 
 
-getOrdersByRetailer - dheeraj (done)
-createOrderItem - dheeraj - done - redundant
-updateProduct - 
-createOrder - dheeraj (done) fixed by yashwanth
-getOrderByID - dheeraj (done)
 
 if order successful ->
 updateOrder
@@ -94,17 +84,15 @@ distributor
 getTotalSale - join orders and retailer
 getSaleByRetailer - 
 getSaleByRetailer - filter via date
-createProduct
-updateProduct
-deleteProduct
-getAllProductsByDistributorId
+updateProduct - dheeraj
+deleteProduct - dheeraj
 
 
 
 orders API 
 =============================
 
-/api/orders - POST
+/api/orders - POST - done
 
 order_id - created from backend
 order_amount - req.body
@@ -121,4 +109,14 @@ product_qty - req.body
 order_id - part of transaction so backend will fill order_id
 
 
+SALES API
+=========================
 
+retailer-wise sale -> join orders, distributors, retailers where orders status is successful
+
+product-wise sale -> join order_items
+
+font end --->
+
+create products
+update products

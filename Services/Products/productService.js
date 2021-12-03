@@ -70,6 +70,7 @@ module.exports.getProductById = async (req, res, next) => {
     return res.status(500).send("server error");
   }
 };
+
 module.exports.getProductsByDistributorId = async (req, res, next) => {
   try {
     const { distributor_id } = req.params;
