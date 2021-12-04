@@ -111,6 +111,7 @@ module.exports.login = async (req, res, next) => {
       }
 
       const modifiedUser = {
+        retailer_id: retailer.retailer_id,
         name: retailer.name,
         email: retailer.email,
         phone_number: retailer.phone_number,
@@ -120,11 +121,14 @@ module.exports.login = async (req, res, next) => {
       const payload = {
         retailer_id: retailer.retailer_id,
         isDistributor: retailer.isDistributor,
+        role: retailer.isDistributor ? "distributor" : "retailer",
         user: {
+          retailer_id: retailer.retailer_id,
           name: retailer.name,
           email: retailer.email,
           phone_number: retailer.phone_number,
           isDistributor: retailer.isDistributor,
+          role: retailer.isDistributor ? "distributor" : "retailer",
         },
       };
 
@@ -160,6 +164,7 @@ module.exports.login = async (req, res, next) => {
       }
 
       const modifiedUser = {
+        distributor_id: distributor.distributor_id,
         name: distributor.name,
         email: distributor.email,
         phone_number: distributor.phone_number,
@@ -169,11 +174,14 @@ module.exports.login = async (req, res, next) => {
       const payload = {
         distributor_id: distributor.distributor_id,
         isDistributor: distributor.isDistributor,
+        role: distributor.isDistributor ? "distributor" : "retailer",
         user: {
+          distributor_id: distributor.distributor_id,
           name: distributor.name,
           email: distributor.email,
           phone_number: distributor.phone_number,
           isDistributor: distributor.isDistributor,
+          role: distributor.isDistributor ? "distributor" : "retailer",
         },
       };
 
