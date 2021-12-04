@@ -38,6 +38,7 @@ const {
 
 const AuthService = require("../../Services/Auth/authService");
 const { verifyToken } = require("../../Middlewares/Auth/verifyToken");
+const RazorpayService = require("../../Services/Razorpay/razorpayService");
 
 router.post("/distributors", createDistributorValidator, (req, res, next) => {
   return DistributorService.createDistributor(req, res, next);
@@ -83,11 +84,25 @@ router.post(
     return OrderService.createOrder(req, res, next);
   }
 );
-router.get("/orders/:client_id", createOrderValidator, (req, res, next) => {
-  return OrderService.getAllOrdersByDistributorId(req, res, next);
-});
+router.get(
+  "/orders/:client_id/:distributor_id",
+  createOrderValidator,
+  (req, res, next) => {
+    return OrderService.getAllOrdersByRetailer(req, res, next);
+  }
+);
+router.get(
+  "/orders/:distributor_id",
+  createOrderValidator,
+  (req, res, next) => {
+    return OrderService.getAllOrdersByDistributorId(req, res, next);
+  }
+);
 router.get("/order/:order_id", createOrderValidator, (req, res, next) => {
   return OrderService.getOrderById(req, res, next);
+});
+router.post("/orders/:order_id", createOrderValidator, (req, res, next) => {
+  return OrderService.updateOrderById(req, res, next);
 });
 
 router.post("/items", createItemValidator, (req, res, next) => {
@@ -108,6 +123,10 @@ router.get("/auth/verify", (req, res, next) => {
 
 router.post("/auth", (req, res, next) => {
   return AuthService.login(req, res, next);
+});
+
+router.post("/razorpay", (req, res, next) => {
+  return RazorpayService.createOrder(req, res, next);
 });
 
 module.exports = router;
