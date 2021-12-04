@@ -63,7 +63,8 @@ module.exports.searchDistributorByName = async (req, res, next) => {
   try {
     const { name: distributor_name } = req.query;
     const distributors = await sequelize.query(
-      `CALL get_distributor_by_name("${distributor_name}")`
+      `CALL get_distributor_by_name("${distributor_name}")`,
+      { type: QueryTypes.RAW }
     );
 
     if (_.isEmpty(distributors)) {

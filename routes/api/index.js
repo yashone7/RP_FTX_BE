@@ -64,6 +64,10 @@ router.get("/productsByDistributor/:distributor_id", (req, res, next) => {
   return ProductService.getProductsByDistributorId(req, res, next);
 });
 
+router.get("/retailers", (req, res, next) => {
+  return RetailerService.getAllRetailer(req, res, next);
+});
+
 router.post("/retailers", createRetailerValidator, (req, res, next) => {
   return RetailerService.createRetailer(req, res, next);
 });
@@ -101,9 +105,13 @@ router.get(
 router.get("/order/:order_id", createOrderValidator, (req, res, next) => {
   return OrderService.getOrderById(req, res, next);
 });
-router.post("/orders/:order_id", createOrderValidator, (req, res, next) => {
-  return OrderService.updateOrderById(req, res, next);
-});
+
+router.patch(
+  "/orders/update",
+  /* createOrderValidator, */ (req, res, next) => {
+    return OrderService.updateOrderById(req, res, next);
+  }
+);
 
 router.post("/items", createItemValidator, (req, res, next) => {
   return ItemService.createItem(req, res, next);
@@ -127,6 +135,22 @@ router.post("/auth", (req, res, next) => {
 
 router.post("/razorpay", (req, res, next) => {
   return RazorpayService.createOrder(req, res, next);
+});
+
+router.get("/sale", (req, res, next) => {
+  return OrderService.getTotalSale(req, res, next);
+});
+
+router.get("/sale/retailer/:retailer_id", (req, res, next) => {
+  return OrderService.getSaleByRetailerId(req, res, next);
+});
+
+router.get("/sale/retailer", (req, res, next) => {
+  return OrderService.getSaleByRetailerBetweenDates(req, res, next);
+});
+
+router.get("/sale/date/:start_date/:end_date", (req, res, next) => {
+  return OrderService.getTotalSaleBetweendates(req, res, next);
 });
 
 module.exports = router;

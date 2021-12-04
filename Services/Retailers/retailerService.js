@@ -72,3 +72,20 @@ module.exports.getRetailerDistributorFavs = async (req, res, next) => {
     return res.status(500).json({ message: "server error", error: err });
   }
 };
+
+module.exports.getAllRetailer = async (req, res, next) => {
+  try {
+    const retailer = await Retailer.findAll({
+      attributes: ["retailer_id", "name", "email", "location"],
+    });
+
+    if (_.isEmpty(retailer)) {
+      return res.status(404).send({ message: "no records found", retailer });
+    }
+
+    return res.status(200).json(retailer);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("server error");
+  }
+};

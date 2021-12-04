@@ -3,6 +3,7 @@ const {
   UUIDV4,
   FLOAT,
   UUID,
+  STRING,
   DataTypes,
   // DATETIME,
 } = require("sequelize");
@@ -27,6 +28,9 @@ const Orders = sequelize.define("Order", {
     type: DataTypes.ENUM("success", "pending", "failed"),
     defaultValue: "pending",
     allowNull: false,
+  },
+  transaction_id: {
+    type: STRING,
   },
   distributor_id: {
     type: UUID,
