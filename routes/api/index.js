@@ -84,9 +84,20 @@ router.post(
     return OrderService.createOrder(req, res, next);
   }
 );
-router.get("/orders/:client_id", createOrderValidator, (req, res, next) => {
-  return OrderService.getAllOrdersByDistributorId(req, res, next);
-});
+router.get(
+  "/orders/:client_id/:distributor_id",
+  createOrderValidator,
+  (req, res, next) => {
+    return OrderService.getAllOrdersByRetailer(req, res, next);
+  }
+);
+router.get(
+  "/orders/:distributor_id",
+  createOrderValidator,
+  (req, res, next) => {
+    return OrderService.getAllOrdersByDistributorId(req, res, next);
+  }
+);
 router.get("/order/:order_id", createOrderValidator, (req, res, next) => {
   return OrderService.getOrderById(req, res, next);
 });

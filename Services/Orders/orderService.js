@@ -40,7 +40,6 @@ module.exports.createOrder = async (req, res, next) => {
         ...obj,
       };
     });
-
     console.log(new_cart);
 
     let order = await Order.create(
@@ -79,8 +78,23 @@ module.exports.createOrder = async (req, res, next) => {
 
 module.exports.getAllOrdersByDistributorId = async (req, res, next) => {
   try {
-    const { client_id } = req.params;
-    let orders = await Order.findAll({ where: { client_id } });
+    const { distributor_id } = req.params;
+    let orders = await Order.findAll({ where: { distributor_id } });
+    if (_.isEmpty(orders)) {
+      return res
+        .status(404)
+        .send("No orders exist in the database with given retailer id");
+    }
+    return res.status(200).json(orders);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("server error");
+  }
+};
+module.exports.getAllOrdersByRetailer = async (req, res, next) => {
+  try {
+    const { client_id, distributor_id } = req.params;
+    let orders = await Order.findAll({ where: { client_id, distributor_id } });
     if (_.isEmpty(orders)) {
       return res
         .status(404)
