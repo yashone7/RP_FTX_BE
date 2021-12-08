@@ -153,9 +153,25 @@ module.exports.updateOrderById = async (req, res, next) => {
 
 module.exports.getTotalSale = async (req, res, next) => {
   try {
-    const sale = await sequelize.query(`CALL get_total_sale()`, {
-      type: QueryTypes.RAW,
-    });
+    // const sale = await sequelize.query(`CALL get_total_sale()`, {
+    //   type: QueryTypes.RAW,
+    // });
+
+    const sale = await sequelize.query(
+      `
+        SELECT o.order_id, 
+        o.order_amount, 
+        r.retailer_id, 
+        d.distributor_id, 
+        r.name AS retailer_name, 
+        d.name AS distributor_name, 
+        r.location, r.pincode  
+        FROM orders o INNER JOIN retailers r ON
+        o.client_id = r.retailer_id INNER JOIN distributors d ON
+        d.distributor_id = o.distributor_id;
+    `,
+      { type: QueryTypes.SELECT }
+    );
 
     if (_.isEmpty(sale)) {
       return res.status(404).json({ message: "no records found", sale });
