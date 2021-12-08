@@ -27,3 +27,6 @@ Database: MySQL
 Front-end Repo: https://github.com/yashone7/rp_ftx_fe
 
 Back-end Repo: https://github.com/yashone7/RP_FTX_BE
+
+## Access backend
+Go to this site https://polite-warthog-7.loca.lt/ and select "click to continue", to access backend.
